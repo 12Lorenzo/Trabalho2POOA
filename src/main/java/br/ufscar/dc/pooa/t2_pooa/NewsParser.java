@@ -10,24 +10,26 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class NewsParser {
-    public static List<News> getNews(String link, String className) throws IOException{
+    public static List<News> getNews(List<SiteNews> sites) throws IOException{
     	List<News> newsList = new ArrayList<>();
-        Document doc = Jsoup.connect(link).get();
-        Elements titles = doc.select(className);
-        for (Element t : titles) {
-        	String newsTitle = t.text();
-        	String newsLink = null;
-        	
-            Element parent = t.parent();
-            while (parent != null && !parent.tagName().equals("a")) {
-                parent = parent.parent();
-            }
-            if (parent != null && parent.tagName().equals("a")) {
-                newsLink = String.format("\"%s\"", parent.attr("href"));
-            }
-            News news = new News(newsTitle, newsLink);
-            newsList.add(news);
-        }
+    	for(SiteNews site : sites) {
+	        Document doc = Jsoup.connect(site.getUrl()).get();
+	        Elements titles = doc.select(site.getTitleClass());
+	        for (Element t : titles) {
+	        	String newsTitle = t.text();
+	        	String newsLink = null;
+	        	
+	            Element parent = t;
+	            while (parent != null && !parent.tagName().equals("a")) {
+	                parent = parent.parent();
+	            }
+	            if (parent != null && parent.tagName().equals("a")) {
+	                newsLink = String.format("\"%s\"", parent.attr("href"));
+	            }
+	            News news = new News(site.getName(), newsTitle, newsLink);
+	            newsList.add(news);
+	        }
+    	}
         return newsList;
     }
 }

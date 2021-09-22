@@ -18,7 +18,8 @@ public class Functions {
             pw.print("\n");
             
             for (News n : newsList) {
-                pw.print(n.getTitle() + ";");
+                pw.print(n.getSiteName() + ";");
+                pw.print(n.getTitle().replaceAll(";", ",") + ";");
                 pw.print(n.getLink() + ";");
                 pw.print("\n");
             }
