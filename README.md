@@ -6,6 +6,8 @@ Passamos por vários estágios durante o desenvolvimento deste projeto, cada um 
 
 Desse momento em diante buscamos escrever um código com ambos os benefícios: um código genérico, que funcionasse para a grande maioria dos sites sem muitas alterações, e um código expandível, no qual o método genérico pudesse ser reimplementado para atender às necessidades de sites específicos, mas sem afetar os sites já criados.
 
+## O Código
+
 Em um primeiro momento foi criada a classe **News** onde devem ser armazenadas as notícias. A intenção era ter algo concreto para armazenar os resultados do parsing realizado no site, e que pudesse ser utilizado em diversos algorítmos diferentes. Esta classe tem as propriedades **title**, que armazena os títulos das notícias, e **link**, que guarda o link para estas.
 
 ```java
