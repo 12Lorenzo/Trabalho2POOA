@@ -65,18 +65,19 @@ public abstract class NewsParser {
 
 		// Percorre todos os títulos encontrados e guarda o título e o link da notícia
 		for (Element t : titles) {
+	
 			String newsTitle = t.text();
 			String newsLink = null;
 
-		    Element parent = t;
-		    while (parent != null && !parent.tagName().equals("a")) {
-			parent = parent.parent();
-		    }
-		    if (parent != null && parent.tagName().equals("a")) {
-			newsLink = String.format("\"%s\"", parent.attr("href"));
-		    }
-		    News news = new News(newsTitle, newsLink);
-		    newsList.add(news);
+			Element parent = t;
+			while (parent != null && !parent.tagName().equals("a")) {
+				parent = parent.parent();
+			}
+			if (parent != null && parent.tagName().equals("a")) {
+				newsLink = String.format("\"%s\"", parent.attr("href"));
+			}
+			News news = new News(newsTitle, newsLink);
+			newsList.add(news);
 		}
         	return newsList;
 	}
@@ -92,13 +93,13 @@ public class GloboParser extends NewsParser{
 		url = "https://www.globo.com";
 		titleClass = ".post__title";
 	}
-	
+
 }
 
 // EstadaoParser.java
 public class EstadaoParser extends NewsParser{
 	
-    public EstadaoParser() {
+	public EstadaoParser() {
 		url = "https://www.estadao.com.br";
 		titleClass = "h3.title a";
 	}
@@ -107,7 +108,7 @@ public class EstadaoParser extends NewsParser{
 // UolParser.java
 public class UolParser extends NewsParser{
 	
-    public UolParser() {
+	public UolParser() {
 		url = "https://www.uol.com.br";
 		titleClass = "h2.titulo";
 	}
