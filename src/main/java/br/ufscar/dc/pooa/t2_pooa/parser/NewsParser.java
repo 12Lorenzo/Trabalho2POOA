@@ -16,10 +16,19 @@ public abstract class NewsParser {
 	protected String url;
 	protected String titleClass;
 
+	// Método padrão para o parsing e coleta de notícias de um site
+	// Apesar de não servir para todos os casos, serve para a maioria deles
+	// Pode ser reimplementado por cada subclasse para atender suas necessidades
 	public List<News> getNews() throws IOException{
 		List<News> newsList = new ArrayList<>();
+		
+		// Se conecta ao site com a url passada
         Document doc = Jsoup.connect(url).get();
+        
+        // Pega o conteúdo das classe dos títulos
         Elements titles = doc.select(titleClass);
+        
+        // Percorre todos os títulos encontrados e guarda o título e o link da notícia
         for (Element t : titles) {
         	String newsTitle = t.text();
         	String newsLink = null;
