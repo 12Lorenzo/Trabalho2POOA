@@ -15,7 +15,7 @@ Em um primeiro momento foi criada a classe **News** onde devem ser armazenadas a
 public class News {
 	private String title;
 	private String link;
-		
+
 	public News(String title, String link) {
 		super();
 		this.title = title;
@@ -33,7 +33,7 @@ public class News {
 	public void setLink(String link) {
 		this.link = link;
 	}
-	
+
 	public static List<String> getFields(){
 		List<String> fieldList = new ArrayList<>();
 		fieldList.add("title");
@@ -43,7 +43,7 @@ public class News {
 }
 ```
 
-Em seguida, foi criada uma classe para realizar o parsing dos sites de notícias, isto é, a obtenção dos títulos e links das principais notícias dos sites em questão. Para isso foi criada a classe abstrata **NewsParser**, a qual tem os atributos **url** (link do site de notícias) e **titleClass** (classe HTML onde ficam os títulos nesse site), além do método **getNews()** que utiliza as propriedades citadas para obter as notícias de um site e armazená-las em uma lista de de notícias (**List<News>**). Inicialmente o método getNews() era apenas um método abstrato e sua implementação era deixada a cargo de suas subclasses; entretanto, notamos que, como o parsing não muda para a grande maioria dos sites, havia uma grande repetição de código. Por este motivo, optamos por implementar este método na classe abstrata, de modo que todas suas subclasses o herdarão e poderão sobrescrevê-lo, caso necessário. A inicialização dos atributos **url** e **titleClass** fica a cargo dos construtores das subclasses.
+Em seguida, foi criada uma classe para realizar o parsing dos sites de notícias, isto é, a obtenção dos títulos e links das principais notícias dos sites em questão. Para isso foi criada a classe abstrata **NewsParser**, a qual tem os atributos **url** (link do site de notícias) e **titleClass** (classe HTML onde ficam os títulos nesse site), além do método **getNews()** que utiliza as propriedades citadas para obter as notícias de um site e armazená-las em uma lista de de notícias (List<News>). Inicialmente o método getNews() era apenas um método abstrato e sua implementação era deixada a cargo de suas subclasses; entretanto, notamos que, como o parsing não muda para a grande maioria dos sites, havia uma grande repetição de código. Por este motivo, optamos por implementar este método na classe abstrata, de modo que todas suas subclasses o herdarão e poderão sobrescrevê-lo, caso necessário. A inicialização dos atributos **url** e **titleClass** fica a cargo dos construtores das subclasses.
 
 ```java
 public abstract class NewsParser {
@@ -88,7 +88,7 @@ Implementada a classe abstrata, implementamos subclasses que extendem a classe *
 // GloboParser.java
 public class GloboParser extends NewsParser{
 	
-    public GloboParser() {
+	public GloboParser() {
 		url = "https://www.globo.com";
 		titleClass = ".post__title";
 	}
