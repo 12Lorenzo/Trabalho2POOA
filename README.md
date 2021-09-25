@@ -79,7 +79,7 @@ public abstract class NewsParser {
 			News news = new News(newsTitle, newsLink);
 			newsList.add(news);
 		}
-        	return newsList;
+        return newsList;
 	}
 }
 ```
@@ -161,25 +161,25 @@ public class NewsToCsv extends Algorithm{
 	@Override
 	public void execute() throws IOException {
 		// Coleta a data e hora atual para colocar no nome do arquivo
-        String strNow = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss").format(LocalDateTime.now());
-        
-        // Cria um arquivo csv com o nome do site e a hora atual
-        try (PrintWriter pw = new PrintWriter(new FileWriter(new File(String.format("%s_%s.csv", site, strNow))))) {
-        	
-        	// As classe News tem um método que retorna os campos presentas nela. 
-        	// Estes campos são usados como nomes para as colunas do csv
-            for(String field : News.getFields()) {
-                pw.print(field + ";");
-            }
-            pw.print("\n");
-            
-            // Percorre todas as notícias da lista e coloca no csv
-            for (News n : newsList) {
-                pw.print(n.getTitle().replaceAll(";", ",") + ";");
-                pw.print(n.getLink() + ";");
-                pw.print("\n");
-            }
-        }
+		String strNow = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss").format(LocalDateTime.now());
+
+		// Cria um arquivo csv com o nome do site e a hora atual
+		try (PrintWriter pw = new PrintWriter(new FileWriter(new File(String.format("%s_%s.csv", site, strNow))))) {
+
+			// As classe News tem um método que retorna os campos presentas nela. 
+			// Estes campos são usados como nomes para as colunas do csv
+		    for(String field : News.getFields()) {
+				pw.print(field + ";");
+		    }
+		    pw.print("\n");
+
+		    // Percorre todas as notícias da lista e coloca no csv
+		    for (News n : newsList) {
+				pw.print(n.getTitle().replaceAll(";", ",") + ";");
+				pw.print(n.getLink() + ";");
+				pw.print("\n");
+		    }
+		}
     }
 }
 ```
